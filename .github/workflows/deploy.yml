@@ -1,0 +1,21 @@
+name: 🚀 Deploy EquipTrack via SSH
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔐 Conectando ao servidor e executando deploy
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            echo "🔐 Conectado ao servidor"
+            /usr/local/bin/deploy_equiptrack.sh
+

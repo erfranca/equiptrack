@@ -1,3 +1,4 @@
+import authRoutes from './routes/auth.js';
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
@@ -36,7 +37,7 @@ function authMiddleware(req, res, next) {
 
 // --- Auth ---
 app.post('/api/auth/login', (req, res) => {
-  const { email, password } = req.body || {};
+  const { email, senha: password } = req.body || {};
   if (!email || !password) return res.status(400).json({ error: 'Email e senha são obrigatórios' });
   const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email);
   if (!user) return res.status(401).json({ error: 'Credenciais inválidas' });
@@ -149,3 +150,5 @@ app.listen(PORT, () => {
   console.log(`✅ EquipTrack API rodando em http://localhost:${PORT}`);
   console.log('Endpoints: /api/auth/login, /api/clients, /api/equipments ...');
 });
+
+app.use('/api/auth', authRoutes);

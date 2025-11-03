@@ -1,6 +1,6 @@
+import Login from '../components/Login';
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import LoginPage from '../pages/LoginPage'
 import Dashboard from '../pages/Dashboard'
 import EquipmentForm from '../pages/EquipmentForm'
 import EquipmentSearch from '../pages/EquipmentSearch'
@@ -18,7 +18,7 @@ function PrivateRoute({ children }) {
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/" element={<PrivateRoute><AppLayout /></PrivateRoute>}>
         <Route index element={<Dashboard />} />
         <Route path="equipamentos/novo" element={<EquipmentForm />} />
